@@ -1,0 +1,90 @@
+@import "../../../../styles/colors";
+
+:host {
+    position: fixed;
+    z-index: 1000;
+    right: 14px;
+    top: 14px;
+
+    &:hover .user {
+        color: $foreColor;
+
+        .picture {
+            box-shadow: none;
+        }
+    }
+
+    &:hover .details {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    @media (max-width: 1200px) {
+        display: none;
+    }
+}
+
+.details {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    min-width: 400px;
+    padding: 16px;
+    padding-top: 89px;
+    transition: all 150ms;
+    padding-top: 80px;
+    background: $backColorMediumDark;
+    color: $foreColor;
+    transition: all 150ms;
+    opacity: 0;
+    visibility: hidden;
+    transform: rotateX(5deg) scale(0.95);
+    transform-origin: top right;
+
+    .info {
+        &:before {
+            content: attr(label);
+            font-size: 14px;
+            display: block;
+            font-weight: 400;
+        }
+
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0 16px;
+        margin-bottom: 12px;
+        white-space: pre-wrap;
+    }
+
+    .button-container {
+        margin-top: 32px;
+        min-width: 300px;
+
+        a:hover {
+            color: $foreColorMediumLight;
+        }
+    }
+}
+
+.user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-weight: 500;
+    margin: 16px;
+    z-index: 101;
+    padding-left: 16px;
+
+    .picture {
+        width: 48px;
+        height: 48px;
+        margin-left: 16px;
+        font-size: 40px;
+        text-align: center;
+        overflow: hidden;
+        transition: all 150ms;
+    }
+}

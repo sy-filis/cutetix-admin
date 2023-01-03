@@ -1,0 +1,17 @@
+<button class="default-style toggle-button" (click)="toggle()">
+    <i *ngIf="!visible" class="fas fa-bars"></i>
+    <i *ngIf="visible" class="fas fa-times"></i>
+</button>
+<div class="hide-nav-bar {{visible ? 'visible' : ''}}" (click)="hide()"></div>
+<div class="wrapper {{visible ? 'visible' : ''}}">
+    <h1>
+        <div>PohLes</div>
+        <div>Admin</div>
+    </h1>
+    <nav>
+        <app-nav-bar-item *ngFor="let item of availableItems" [item]="item">
+            <app-nav-bar-subitem *ngFor="let subItem of item.subItems" [name]="subItem.name" [link]="subItem.link" (click)="hide()">
+            </app-nav-bar-subitem>
+        </app-nav-bar-item>
+    </nav>
+</div>

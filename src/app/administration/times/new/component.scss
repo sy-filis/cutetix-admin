@@ -1,0 +1,39 @@
+@import "../../../../styles/colors";
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    padding: 1rem 1.5rem;
+    margin: auto;
+    background-color: $foreColorMediumLight;
+
+    label {
+        margin-top: .5rem;
+    }
+
+    input {
+        border: 2px solid black;
+        font-size: 1.5rem;
+        line-height: 1rem;
+        padding: .5rem .75rem;
+        min-height: 15px;
+        margin: .25rem;
+        outline: none;
+
+        &:focus-within {
+            border: 2px solid rgba($color: black, $alpha: .75);
+            background-color: rgba($color: black, $alpha: .25);
+            color: $foreColor;
+
+            &::placeholder {
+                color: $foreColor;
+            }
+        }
+    }
+
+    button {
+        max-width: 99%;
+        margin: 10px 0px;
+    }
+}

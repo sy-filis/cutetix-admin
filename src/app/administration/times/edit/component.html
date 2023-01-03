@@ -1,0 +1,12 @@
+<form [formGroup]="form" (submit)="editTime()">
+    <h1>{{ showDetail ? 'Time detail' : 'Edit time' }}</h1>
+    <label for="name">Name</label>
+    <input type="text" name="name" formControlName="name" required>
+
+    <label for="maxCountOfTickets">Count of tickets</label>
+    <input type="number" name="maxCountOfTickets" formControlName="maxCountOfTickets" required>
+
+    <button class="alt">
+        Edit
+    </button>
+</form>

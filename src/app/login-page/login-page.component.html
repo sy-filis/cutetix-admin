@@ -1,0 +1,22 @@
+<h1 class="title">PohLes admin interface</h1>
+
+<div class="error" *ngIf="loginFailed">
+    <p>
+        {{ errorText }}
+    </p>
+</div>
+
+<div class="window">
+    <h2 class="ignore-mobile">Login</h2>
+    <p>You must be logged in to enter the system.</p>
+    <form [formGroup]="loginForm" (submit)="loginWithPassword()">
+        <input type="text" formControlName="username" placeholder="Username">
+        <input type="password" formControlName="password" placeholder="Password" class="password">
+        <button class="alt"
+            [disabled]="(!loginForm.value.username) || (!loginForm.value.password) || loggingIn">
+            <i class="fa-icon fas fa-sign-in-alt" *ngIf="!loggingIn"></i>
+            <span *ngIf="!loggingIn">Log in</span>
+            <i class="fa-icon fas fa-circle-notch fa-spin" *ngIf="loggingIn"></i>
+        </button>
+    </form>
+</div>

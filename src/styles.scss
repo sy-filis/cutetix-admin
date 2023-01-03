@@ -1,0 +1,60 @@
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+@import 'ngx-toastr/toastr';
+
+/**
+ * Global styles
+ */
+
+@import "styles/colors";
+@import "styles/fonts";
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+body {
+    user-select: none;
+    background: $backColor;
+    color: $foreColor;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+
+// class for light mode defined in colors file
+
+body.alt-font {
+    font-family: "Open Sans";
+}
+
+// @import "styles/filters";
+@import "styles/typography";
+@import "styles/button";
+// @import "styles/table";
+// @import "styles/form";
+
+.search {
+    display: inline-flex;
+
+    section {
+        margin-left: 10px;
+    }
+
+    select {
+        width: 350px;
+    }
+}
