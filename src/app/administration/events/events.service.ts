@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Event } from './event.types';
+import { Event } from './events.types';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

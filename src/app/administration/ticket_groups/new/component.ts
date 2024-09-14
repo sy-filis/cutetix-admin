@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TicketGroupService } from '../ticket_groups.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { EventService } from '../../events/event.service';
-import { Event } from '../../events/event.types';
+import { EventService } from '../../events/events.service';
+import { Event } from '../../events/events.types';
 
 @Component({
   selector: 'app-ticket_groups-new',
