@@ -1,0 +1,74 @@
+@import '../../../styles/colors';
+
+.dataTables_wrapper,
+tr.odd {
+    background-color: $backColorMediumDarkTran;
+}
+
+
+td {
+    button {
+        min-width: 0px !important;
+        max-width: 100px !important;
+        box-shadow: none;
+        padding: 10px;
+        margin: auto 2.5px;
+
+        &.delete {
+            background-color: tomato;
+        }
+
+        &.edit {
+            background-color: #BF40BF;
+        }
+    }
+}
+
+.error {
+    animation: 500ms fadeIn;
+    animation-delay: 300ms;
+    animation-fill-mode: backwards;
+}
+
+.error {
+    background-color: rgba($color: red, $alpha: 0.15);
+    padding: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    padding: 1rem 1.5rem;
+    margin: auto;
+    background-color: $foreColorMediumLight;
+
+    label {
+        margin-top: .5rem;
+    }
+
+    input {
+        border: 2px solid black;
+        font-size: 1.5rem;
+        line-height: 1rem;
+        padding: .5rem .75rem;
+        min-height: 15px;
+        margin: .25rem;
+        outline: none;
+
+        &:focus-within {
+            border: 2px solid rgba($color: black, $alpha: .75);
+            background-color: rgba($color: black, $alpha: .25);
+            color: $foreColor;
+
+            &::placeholder {
+                color: $foreColor;
+            }
+        }
+    }
+
+    button {
+        max-width: 99%;
+        margin: 10px 0px;
+    }
+}
