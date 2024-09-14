@@ -3,6 +3,7 @@ export interface Ticket {
     firstname: string;
     lastname: string;
     email: string;
+    // TODO: Enum
     status?: number;
     description?: string;
     group_id: number;

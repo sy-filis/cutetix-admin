@@ -64,18 +64,18 @@ export class TicketService {
     )
   }
 
-  // public create(ticket: Ticket): Observable<Ticket> {
-  //   return this.httpClient.post(
-  //     `${environment.backend.api}/${this.API_PATH}`,
-  //     ticket
-  //   ).pipe(
-  //     map(
-  //       (res: any) => {
-  //         return <Ticket>res;
-  //       }
-  //     )
-  //   )
-  // }
+  public create(ticket: Ticket): Observable<Ticket> {
+    return this.httpClient.post(
+      `${environment.backend.api}/${this.API_PATH}`,
+      ticket
+    ).pipe(
+      map(
+        (res: any) => {
+          return <Ticket>res;
+        }
+      )
+    )
+  }
 
   // public update(
   //   id: string,

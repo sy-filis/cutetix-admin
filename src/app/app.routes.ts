@@ -11,6 +11,7 @@ import { TicketGroupsEditComponent } from './administration/ticket_groups/edit/c
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EventsListComponent } from './administration/events/list/component';
 import { TicketsListComponent } from './administration/tickets/list/component';
+import { TicketsNewComponent } from './administration/tickets/new/component';
 
 export let APP_ROUTES: Routes = [
   {
@@ -45,20 +46,6 @@ export let APP_ROUTES: Routes = [
         component: UserProfileComponent
       },
       {
-        path: 'events',
-        children: [
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: 'list',
-          },
-          {
-            path: 'list',
-            component: EventsListComponent
-          },
-        ]
-      },
-      {
         path: 'tickets',
         children: [
           {
@@ -70,6 +57,10 @@ export let APP_ROUTES: Routes = [
             path: 'list',
             component: TicketsListComponent
           },
+          {
+            path: 'add',
+            component: TicketsNewComponent
+          }
         ]
       },
       {
@@ -96,6 +87,20 @@ export let APP_ROUTES: Routes = [
             path: 'detail/:id',
             component: TicketGroupsEditComponent,
           }
+        ]
+      },
+      {
+        path: 'events',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'list',
+          },
+          {
+            path: 'list',
+            component: EventsListComponent
+          },
         ]
       },
       {
