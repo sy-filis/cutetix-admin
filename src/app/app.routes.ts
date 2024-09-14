@@ -9,6 +9,7 @@ import { TicketGroupsListComponent } from './administration/ticket_groups/list/c
 import { TicketGroupsNewComponent } from './administration/ticket_groups/new/component';
 import { TicketGroupsEditComponent } from './administration/ticket_groups/edit/component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EventsListComponent } from './administration/events/list/component';
 
 export let APP_ROUTES: Routes = [
   {
@@ -41,6 +42,20 @@ export let APP_ROUTES: Routes = [
       {
         path: 'profile',
         component: UserProfileComponent
+      },
+      {
+        path: 'events',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'list',
+          },
+          {
+            path: 'list',
+            component: EventsListComponent
+          },
+        ]
       },
       {
         path: 'ticket_groups',
