@@ -7,9 +7,10 @@ export const environment = {
   backend: {
     // api: "https://api-dev.cutetix.rudickamladez.cz",
     api: "http://localhost:8000",
-    socketio: "https://api-dev.cutetix.rudickamladez.cz/ws"
+    // socketio: "https://api-dev.cutetix.rudickamladez.cz/ws"
   },
   keycloak: {
+    // TODO: Update realm
     issuer: 'https://auth.lukasmatuska.cz/realms/pohles',
     clientId: 'admin-v2',
     clientSecret: 'poW7Tr4edeEKUXf8dGQjpTymye6L4rRW',
