@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TimeService {
-  private API_PATH: string = 'time';
+  private API_PATH: string = 'ticket_groups';
 
   private timeSource = new Subject<Time>();
 

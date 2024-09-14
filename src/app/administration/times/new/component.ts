@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TimeService } from '../time.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { EventService } from '../../events/event.service';
+import { Event } from '../../events/event.types';
 
 @Component({
   selector: 'app-times-new',
@@ -12,19 +14,31 @@ import { Router } from '@angular/router';
 export class TimesNewComponent {
   public form = new FormGroup({
     name: new FormControl('', Validators.required),
-    maxCountOfTickets: new FormControl(0, Validators.required)
+    capacity: new FormControl(0, Validators.required),
+    eventId: new FormControl(1, Validators.required)
   });
+  public events: Array<Event> = [];
 
   constructor(
     private router: Router,
     private timeService: TimeService,
+    private eventService: EventService,
     private toastr: ToastrService
   ) { }
+
+  ngOnInit(): void {
+    this.eventService.get().subscribe({
+      next: (events) => {
+        this.events = events;
+      }
+    })
+  }
 
   public newTime() {
     this.timeService.create({
       name: this.form.value.name || '',
-      maxCountOfTickets: this.form.value.maxCountOfTickets || 0
+      capacity: this.form.value.capacity || 0,
+      event_id: this.form.value.eventId || 0
     }).subscribe({
       next: (time) => {
         this.toastr.info(

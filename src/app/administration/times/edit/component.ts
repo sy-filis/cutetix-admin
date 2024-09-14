@@ -13,7 +13,7 @@ export class TimesEditComponent {
   public id: string | null;
   public form = new FormGroup({
     name: new FormControl('', Validators.required),
-    maxCountOfTickets: new FormControl(0, Validators.required)
+    capacity: new FormControl(0, Validators.required)
   });
   public showDetail: boolean = false;
 
@@ -59,7 +59,7 @@ export class TimesEditComponent {
         )
         this.form.setValue({
           name: time.name,
-          maxCountOfTickets: time.maxCountOfTickets
+          capacity: time.capacity
         });
       },
       // Error
@@ -83,7 +83,7 @@ export class TimesEditComponent {
       this.id || '',
       {
         name: this.form.value.name || '',
-        maxCountOfTickets: this.form.value.maxCountOfTickets || 0
+        capacity: this.form.value.capacity || 0
       }
     ).subscribe({
       next: (time) => {

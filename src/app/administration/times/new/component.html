@@ -3,8 +3,13 @@
     <label for="name">Name</label>
     <input type="text" name="name" formControlName="name" required>
 
-    <label for="maxCountOfTickets">Count of tickets</label>
-    <input type="number" name="maxCountOfTickets" formControlName="maxCountOfTickets" required>
+    <label for="capacity">Count of tickets</label>
+    <input type="number" name="capacity" formControlName="capacity" required>
+
+    <label for="eventId">Count of tickets</label>
+    <select name="eventId" formControlName="eventId">
+        <option *ngFor="let event of events" [ngValue]="event.id">{{ event.name }}</option>
+    </select>
 
     <button class="alt">
         Create

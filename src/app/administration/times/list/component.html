@@ -11,7 +11,7 @@
             <tr>
                 <th>Name</th>
                 <th style="display: none;">ID</th>
-                <th>Tickets</th>
+                <th>Capacity</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,7 +21,7 @@
                 <td>{{ time.name }}</td>
                 <!-- so hidden column with IDs is second -->
                 <td style="display: none;">{{ time.id }}</td>
-                <td>{{ time.maxCountOfTickets }}</td>
+                <td>{{ time.capacity }}</td>
                 <td>
                     <button class="edit" (click)="edit(time)">
                         <fa-icon [icon]="faPen"></fa-icon>
