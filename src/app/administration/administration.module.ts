@@ -17,6 +17,7 @@ import { TicketGroupsListComponent } from './ticket_groups/list/component';
 import { TicketGroupsEditComponent } from './ticket_groups/edit/component';
 import { TicketGroupsNewComponent } from './ticket_groups/new/component';
 import { EventsListComponent } from './events/list/component';
+import { TicketsListComponent } from './tickets/list/component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { EventsListComponent } from './events/list/component';
         TicketGroupsListComponent,
         TicketGroupsEditComponent,
         TicketGroupsNewComponent,
-        EventsListComponent
+        EventsListComponent,
+        TicketsListComponent,
     ],
     imports: [
         CommonModule,

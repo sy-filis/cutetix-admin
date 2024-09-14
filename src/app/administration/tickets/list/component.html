@@ -1,0 +1,40 @@
+<app-loading *ngIf="this.loadingState > 0"></app-loading>
+<div>
+    <div *ngIf="this.errorLoading.enabled" class="error">
+        <p>
+            There's problem loading table.<br/>
+            {{ this.errorLoading.text }}
+        </p>
+    </div>
+    <table *ngIf="!this.errorLoading.enabled" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th style="display: none;">ID</th>
+                <th>Ticket sales start</th>
+                <th>Ticket sales end</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ticket of tickets">
+                <!-- Datatables should sort by first column -->
+                <td>{{ ticket.lastname }}</td>
+                <td>{{ ticket.firstname }}</td>
+                <!-- so hidden column with IDs is second -->
+                <td style="display: none;">{{ ticket.id }}</td>
+                <td>{{ ticket.email }}</td>
+                <td>{{ ticket.status }}</td>
+                <td>
+                    <button class="edit" (click)="edit(ticket)">
+                        <fa-icon [icon]="faPen"></fa-icon>
+                    </button>
+                    <button class="delete" (click)="delete(ticket)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
