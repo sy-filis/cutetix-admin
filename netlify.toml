@@ -1,5 +1,5 @@
 [build]
-publish = "dist/pohles-admin/"
+publish = "dist/cutetix-admin/"
 command = "npm run build"
 
 [[redirects]]
