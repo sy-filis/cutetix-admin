@@ -1,20 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { TimeService } from '../time.service';
-import { Time } from '../time.types';
+import { TicketGroupService } from '../ticket_groups.service';
+import { TicketGroup } from '../ticket_groups.types';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-times-list',
+  selector: 'app-ticket_groups-list',
   templateUrl: './component.html',
   styleUrls: ['./component.scss']
 })
-export class TimesListComponent implements OnInit, OnDestroy {
+export class TicketGroupsListComponent implements OnInit, OnDestroy {
   public faPen = faPen;
   public faTrash = faTrash;
-  public times: Time[] = [];
+  public ticket_groups: TicketGroup[] = [];
   public loadingState = 1;
   public errorLoading = {
     enabled: false,
@@ -26,7 +26,7 @@ export class TimesListComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(
-    private readonly timeService: TimeService,
+    private readonly ticket_groupService: TicketGroupService,
     private readonly toastr: ToastrService,
     private readonly router: Router
   ) { }
@@ -37,9 +37,9 @@ export class TimesListComponent implements OnInit, OnDestroy {
       pageLength: 25,
     };
 
-    this.timeService.get().subscribe({
-      next: (times) => {
-        this.times = times;
+    this.ticket_groupService.get().subscribe({
+      next: (ticket_groups) => {
+        this.ticket_groups = ticket_groups;
         // Calling the DT trigger to manually render the table
         this.dtTrigger.next(null);
         this.loadingState--;
@@ -53,9 +53,9 @@ export class TimesListComponent implements OnInit, OnDestroy {
       complete: () => console.info('complete')
     });
 
-    this.timeService.deleteAsObservable().subscribe(
-      (time) => {
-        this.times.splice(this.times.indexOf(time), 1);
+    this.ticket_groupService.deleteAsObservable().subscribe(
+      (ticket_group) => {
+        this.ticket_groups.splice(this.ticket_groups.indexOf(ticket_group), 1);
       }
     );
   }
@@ -65,14 +65,14 @@ export class TimesListComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
-  public edit(time: Time) {
-    this.router.navigate(['/times/edit/' + time.id])
+  public edit(ticket_group: TicketGroup) {
+    this.router.navigate(['/ticket_groups/edit/' + ticket_group.id])
   }
 
-  public delete(time: Time) {
-    if (!time.id) {
+  public delete(ticket_group: TicketGroup) {
+    if (!ticket_group.id) {
       this.toastr.error(
-        `<div><b>Time DIDN'T deleted!</b><br/>Can't delete! Didn't receive time id.</div>`,
+        `<div><b>Ticket group DIDN'T deleted!</b><br/>Can't delete! Didn't receive ticket_group id.</div>`,
         '',
         {
           enableHtml: true,
@@ -81,11 +81,11 @@ export class TimesListComponent implements OnInit, OnDestroy {
       );
       return;
     }
-    this.timeService.delete(time.id).subscribe(
-      (time) => {
-        if (!time) {
+    this.ticket_groupService.delete(ticket_group.id).subscribe(
+      (ticket_group) => {
+        if (!ticket_group) {
           this.toastr.error(
-            `<div><b>Time DIDN'T deleted!</b></div>`,
+            `<div><b>Ticket group DIDN'T deleted!</b></div>`,
             '',
             {
               enableHtml: true,
@@ -94,9 +94,9 @@ export class TimesListComponent implements OnInit, OnDestroy {
           );
           return
         }
-        this.times.splice(this.times.indexOf(time), 1);
+        this.ticket_groups.splice(this.ticket_groups.indexOf(ticket_group), 1);
         this.toastr.info(
-          `<b>Time "${time.name}" deleted</b>`,
+          `<b>Ticket group "${ticket_group.name}" deleted</b>`,
           '',
           {
             enableHtml: true,

@@ -13,9 +13,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingComponent } from './loading/loading.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TimesListComponent } from './times/list/component';
-import { TimesEditComponent } from './times/edit/component';
-import { TimesNewComponent } from './times/new/component';
+import { TicketGroupsListComponent } from './ticket_groups/list/component';
+import { TicketGroupsEditComponent } from './ticket_groups/edit/component';
+import { TicketGroupsNewComponent } from './ticket_groups/new/component';
 
 @NgModule({
     declarations: [
@@ -26,9 +26,9 @@ import { TimesNewComponent } from './times/new/component';
         NavBarSubitemComponent,
         DashboardComponent,
         LoadingComponent,
-        TimesListComponent,
-        TimesEditComponent,
-        TimesNewComponent,
+        TicketGroupsListComponent,
+        TicketGroupsEditComponent,
+        TicketGroupsNewComponent,
     ],
     imports: [
         CommonModule,

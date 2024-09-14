@@ -7,29 +7,24 @@ export class MenuBuilder {
 
         return [
             this.getMenuItem('Tickets', 'tickets', 'fa-ticket', () => this.getTicketsSubItems()),
-            this.getMenuItem('Times', 'times', 'fa-clock', () => this.getTimesSubItems()),
-            this.getMenuItem('Years', 'years', 'fa-calendar-days', () => this.getYearsSubItems()),
+            this.getMenuItem('Ticket groups', 'ticket_groups', 'fa-clock', () => this.getSubItemsByPath('ticket_groups')),
+            this.getMenuItem('Events', 'events', 'fa-calendar-days', () => this.getSubItemsByPath('events')),
         ].filter(o => o);
+    }
+
+    getSubItemsByPath(
+        path: string = 'events'
+    ): MenuSubItem[] {
+        const result: MenuSubItem[] = [];
+        result.push(new MenuSubItem('List', `/${path}/list`));
+        result.push(new MenuSubItem('New', `/${path}/add`));
+        return result;
     }
 
     getTicketsSubItems(): MenuSubItem[] {
         const result: MenuSubItem[] = [];
         result.push(new MenuSubItem('List', '/tickets/list'));
         result.push(new MenuSubItem('New', '/tickets/add'));
-        return result;
-    }
-
-    getTimesSubItems(): MenuSubItem[] {
-        const result: MenuSubItem[] = [];
-        result.push(new MenuSubItem('List', '/times/list'));
-        result.push(new MenuSubItem('New', '/times/add'));
-        return result;
-    }
-
-    getYearsSubItems(): MenuSubItem[] {
-        const result: MenuSubItem[] = [];
-        result.push(new MenuSubItem('List', '/years/list'));
-        result.push(new MenuSubItem('New', '/years/add'));
         return result;
     }
 

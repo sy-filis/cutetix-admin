@@ -5,9 +5,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './administration/dashboard/dashboard.component';
 import { AdministrationLayoutComponent } from './administration/layout/layout.component';
-import { TimesListComponent } from './administration/times/list/component';
-import { TimesNewComponent } from './administration/times/new/component';
-import { TimesEditComponent } from './administration/times/edit/component';
+import { TicketGroupsListComponent } from './administration/ticket_groups/list/component';
+import { TicketGroupsNewComponent } from './administration/ticket_groups/new/component';
+import { TicketGroupsEditComponent } from './administration/ticket_groups/edit/component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 export let APP_ROUTES: Routes = [
@@ -43,7 +43,7 @@ export let APP_ROUTES: Routes = [
         component: UserProfileComponent
       },
       {
-        path: 'times',
+        path: 'ticket_groups',
         children: [
           {
             path: '',
@@ -52,19 +52,19 @@ export let APP_ROUTES: Routes = [
           },
           {
             path: 'list',
-            component: TimesListComponent
+            component: TicketGroupsListComponent
           },
           {
             path: 'add',
-            component: TimesNewComponent
+            component: TicketGroupsNewComponent
           },
           {
             path: 'edit/:id',
-            component: TimesEditComponent
+            component: TicketGroupsEditComponent
           },
           {
             path: 'detail/:id',
-            component: TimesEditComponent,
+            component: TicketGroupsEditComponent,
           }
         ]
       },

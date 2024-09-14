@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TimeService } from '../time.service';
+import { TicketGroupService } from '../ticket_groups.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { EventService } from '../../events/event.service';
 import { Event } from '../../events/event.types';
 
 @Component({
-  selector: 'app-times-new',
+  selector: 'app-ticket_groups-new',
   templateUrl: './component.html',
   styleUrls: ['./component.scss']
 })
-export class TimesNewComponent {
+export class TicketGroupsNewComponent {
   public form = new FormGroup({
     name: new FormControl('', Validators.required),
     capacity: new FormControl(0, Validators.required),
@@ -21,7 +21,7 @@ export class TimesNewComponent {
 
   constructor(
     private router: Router,
-    private timeService: TimeService,
+    private ticket_groupService: TicketGroupService,
     private eventService: EventService,
     private toastr: ToastrService
   ) { }
@@ -34,26 +34,26 @@ export class TimesNewComponent {
     })
   }
 
-  public newTime() {
-    this.timeService.create({
+  public newTicketGroup() {
+    this.ticket_groupService.create({
       name: this.form.value.name || '',
       capacity: this.form.value.capacity || 0,
       event_id: this.form.value.eventId || 0
     }).subscribe({
-      next: (time) => {
+      next: (ticket_group) => {
         this.toastr.info(
           'Successfully created.',
-          `Time called '${time.name}'`,
+          `TicketGroup called '${ticket_group.name}'`,
           {
             progressBar: true
           }
         );
-        this.router.navigate(['/times/list']);
+        this.router.navigate(['/ticket_groups/list']);
       },
       error: (err) => {
         this.toastr.error(
           `NOT CREATED! Error: ${err.message}`,
-          'Time',
+          'TicketGroup',
           {
             progressBar: true
           }

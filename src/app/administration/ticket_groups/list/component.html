@@ -16,17 +16,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let time of times">
+            <tr *ngFor="let ticket_group of ticket_groups">
                 <!-- Datatables should sort by first column -->
-                <td>{{ time.name }}</td>
+                <td>{{ ticket_group.name }}</td>
                 <!-- so hidden column with IDs is second -->
-                <td style="display: none;">{{ time.id }}</td>
-                <td>{{ time.capacity }}</td>
+                <td style="display: none;">{{ ticket_group.id }}</td>
+                <td>{{ ticket_group.capacity }}</td>
                 <td>
-                    <button class="edit" (click)="edit(time)">
+                    <button class="edit" (click)="edit(ticket_group)">
                         <fa-icon [icon]="faPen"></fa-icon>
                     </button>
-                    <button class="delete" (click)="delete(time)">
+                    <button class="delete" (click)="delete(ticket_group)">
                         <fa-icon [icon]="faTrash"></fa-icon>
                     </button>
                 </td>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faCoins, faPlus, faTicket, faTicketAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { TimeService } from '../times/time.service';
-import { TimeSum } from '../times/time.types';
+import { TicketGroupService } from '../ticket_groups/ticket_groups.service';
+import { TicketGroupSum } from '../ticket_groups/ticket_groups.types';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,55 +15,55 @@ export class DashboardComponent {
    totalTicketsIcon = faTicketAlt;
    freeTicketsIcon = faPlus;
    cancelledTicketsIcon = faTimes;
-   timeSum?: TimeSum;
+   ticketGroupSum?: TicketGroupSum;
 
   constructor(
-    private readonly timeService: TimeService,
+    private readonly ticket_groupService: TicketGroupService,
     private readonly toastr: ToastrService
   ) {
-    this.timeService.getActiveSum().subscribe({
-      // success
-      next: (timeSum) => {
-        this.timeSum = timeSum;
-        this.toastr.info(
-          'Loaded successfully',
-          'Times summary',
-          {
-            progressBar: true,
-          }
-        );
-      },
-      // Error
-      error: (err) => {
-        this.toastr.error(
-          err.message,
-          'Cannot load times summary',
-          {
-            progressBar: true,
-          }
-        );
-        return
-      }
-    })
+    // this.ticket_groupService.getActiveSum().subscribe({
+    //   // success
+    //   next: (ticket_groupSum) => {
+    //     this.ticket_groupSum = ticket_groupSum;
+    //     this.toastr.info(
+    //       'Loaded successfully',
+    //       'TicketGroups summary',
+    //       {
+    //         progressBar: true,
+    //       }
+    //     );
+    //   },
+    //   // Error
+    //   error: (err) => {
+    //     this.toastr.error(
+    //       err.message,
+    //       'Cannot load ticket_groups summary',
+    //       {
+    //         progressBar: true,
+    //       }
+    //     );
+    //     return
+    //   }
+    // })
   }
 
   get freeTickets() {
-    return this.timeSum?.free
+    return 0; //this.ticket_groupSum?.free
   }
 
   get reservedTickets() {
-    return this.timeSum?.reserved
+    return 0; //this.ticket_groupSum?.reserved
   }
   
   get cancelledTickets() {
-    return this.timeSum?.cancelled
+    return 0; //this.ticket_groupSum?.cancelled
   }
 
   get totalTickets() {
-    return this.timeSum?.total
+    return 0; //this.ticket_groupSum?.total
   }
 
   get paidTickets() {
-    return this.timeSum?.paid
+    return 0; //this.ticket_groupSum?.paid
   }
 }

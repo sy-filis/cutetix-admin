@@ -1,33 +1,38 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TimeService } from '../time.service';
+import { TicketGroupService } from '../ticket_groups.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EventService } from '../../events/event.service';
+import { Event } from '../../events/event.types';
 
 @Component({
-  selector: 'app-times-edit',
+  selector: 'app-ticket_groups-edit',
   templateUrl: './component.html',
   styleUrls: ['./component.scss']
 })
-export class TimesEditComponent {
+export class TicketGroupsEditComponent {
   public id: string | null;
   public form = new FormGroup({
     name: new FormControl('', Validators.required),
-    capacity: new FormControl(0, Validators.required)
+    capacity: new FormControl(0, Validators.required),
+    eventId: new FormControl(0, Validators.required),
   });
   public showDetail: boolean = false;
+  public events: Array<Event> = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private timeService: TimeService,
+    private ticket_groupService: TicketGroupService,
+    private eventService: EventService,
     private toastr: ToastrService
   ) {
     // Check detail view
     if (this.router.url.includes('detail')) {
       this.showDetail = true;
       this.form.get('name')?.disable();
-      this.form.get('maxCountOftickets')?.disable();
+      this.form.get('capacity')?.disable();
       // this.form.get('sumbit')?.disable();
     }
 
@@ -35,10 +40,10 @@ export class TimesEditComponent {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id == null) {
       this.form.get('name')?.disable();
-      this.form.get('maxCountOftickets')?.disable();
+      this.form.get('capacity')?.disable();
       this.toastr.error(
         'Cannot load',
-        'Time',
+        'Ticket group',
         {
           progressBar: true,
         }
@@ -46,29 +51,33 @@ export class TimesEditComponent {
       return
     }
 
-    // Load time object from database
-    this.timeService.getById(this.id).subscribe({
+    // Load ticket_group object from database
+    this.ticket_groupService.getById(this.id).subscribe({
       // Success
-      next: (time) => {
+      next: (ticket_group) => {
         this.toastr.info(
           'Loaded successfully.',
-          'Time',
+          'Ticket group',
           {
             progressBar: true
           }
         )
+        console.log(ticket_group)
         this.form.setValue({
-          name: time.name,
-          capacity: time.capacity
+          name: ticket_group.name,
+          capacity: ticket_group.capacity,
+          // TODO: Fix depends on backend response
+          eventId: 0 // ticket_group.event_id,
         });
       },
       // Error
       error: (err) => {
         this.form.get('name')?.disable();
-        this.form.get('maxCountOftickets')?.disable();
+        this.form.get('capacity')?.disable();
+        this.form.get('eventId')?.disable();
         this.toastr.error(
           err.message,
-          'Cannot load time',
+          'Cannot load ticket group',
           {
             progressBar: true,
           }
@@ -78,28 +87,36 @@ export class TimesEditComponent {
     });
   }
 
-  public editTime() {
-    this.timeService.update(
+  ngOnInit(): void {
+    this.eventService.get().subscribe({
+      next: (events) => {
+        this.events = events;
+      }
+    })
+  }
+
+  public editTicketGroup() {
+    this.ticket_groupService.update(
       this.id || '',
       {
         name: this.form.value.name || '',
         capacity: this.form.value.capacity || 0
       }
     ).subscribe({
-      next: (time) => {
+      next: (ticket_group) => {
         this.toastr.info(
           'Successfully edited.',
-          `Time called '${time.name}'`,
+          `TicketGroup called '${ticket_group.name}'`,
           {
             progressBar: true
           }
         );
-        this.router.navigate(['/times/list']);
+        this.router.navigate(['/ticket_groups/list']);
       },
       error: (err) => {
         this.toastr.error(
           `NOT EDITED! Error: ${err.message}`,
-          'Time',
+          'TicketGroup',
           {
             progressBar: true
           }

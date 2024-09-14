@@ -2,33 +2,33 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Time, TimeSum, TimeUpdate } from './time.types';
+import { TicketGroup, TicketGroupSum, TicketGroupUpdate } from './ticket_groups.types';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TimeService {
+export class TicketGroupService {
   private API_PATH: string = 'ticket_groups';
 
-  private timeSource = new Subject<Time>();
+  private ticket_groupSource = new Subject<TicketGroup>();
 
   public asObservable() {
-    return this.timeSource.asObservable();
+    return this.ticket_groupSource.asObservable();
   }
 
-  public register(time: Time) {
-    this.timeSource.next(time);
+  public register(ticket_group: TicketGroup) {
+    this.ticket_groupSource.next(ticket_group);
   }
 
-  private deleteSource = new Subject<Time>();
+  private deleteSource = new Subject<TicketGroup>();
 
   public deleteAsObservable() {
     return this.deleteSource.asObservable();
   }
 
-  public ticketDelete(time: Time) {
-    this.deleteSource.next(time);
+  public ticketDelete(ticket_group: TicketGroup) {
+    this.deleteSource.next(ticket_group);
   }
 
   constructor(
@@ -37,12 +37,12 @@ export class TimeService {
 
   }
 
-  public get(): Observable<Time[]> {
+  public get(): Observable<TicketGroup[]> {
     return this.httpClient.get(`${environment.backend.api}/${this.API_PATH}`).pipe(
       map(
         (res: any) => {
           return res.map(
-            (result: any) => <Time[]>result
+            (result: any) => <TicketGroup[]>result
           );
         }
       )
@@ -51,27 +51,27 @@ export class TimeService {
 
   public getById(
     id: string
-  ): Observable<Time> {
+  ): Observable<TicketGroup> {
     console.log(`${environment.backend.api}/${this.API_PATH}/${id}`)
     return this.httpClient.get(
       `${environment.backend.api}/${this.API_PATH}/${id}`
     ).pipe(
       map(
         (res: any) => {
-          return <Time>res;
+          return <TicketGroup>res;
         }
       )
     )
   }
 
-  public create(time: Time): Observable<Time> {
+  public create(ticket_group: TicketGroup): Observable<TicketGroup> {
     return this.httpClient.post(
       `${environment.backend.api}/${this.API_PATH}`,
-      time
+      ticket_group
     ).pipe(
       map(
         (res: any) => {
-          return <Time>res;
+          return <TicketGroup>res;
         }
       )
     )
@@ -79,34 +79,34 @@ export class TimeService {
 
   public update(
     id: string,
-    body: TimeUpdate
-  ): Observable<Time> {
+    body: TicketGroupUpdate
+  ): Observable<TicketGroup> {
     return this.httpClient.patch(
       `${environment.backend.api}/${this.API_PATH}/${id}`,
       body
     ).pipe(
       map(
         (res: any) => {
-          return <Time>res;
+          return <TicketGroup>res;
         }
       )
     )
   }
 
-  public delete(id: string): Observable<Time> {
+  public delete(id: string): Observable<TicketGroup> {
     return this.httpClient.delete(`${environment.backend.api}/${this.API_PATH}/${id}`).pipe(
       map(
         (res: any) => {
-          return <Time>res;
+          return <TicketGroup>res;
         }
       )
     )
   }
 
-  public getActiveSum(): Observable<TimeSum> {
+  public getActiveSum(): Observable<TicketGroupSum> {
     return this.httpClient.get(`${environment.backend.api}/${this.API_PATH}/active/sum`).pipe(
       map(
-        (timeSum: any) => <TimeSum>timeSum
+        (ticket_groupSum: any) => <TicketGroupSum>ticket_groupSum
       )
     );
   }
