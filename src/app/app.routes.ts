@@ -12,6 +12,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EventsListComponent } from './administration/events/list/component';
 import { TicketsListComponent } from './administration/tickets/list/component';
 import { TicketsNewComponent } from './administration/tickets/new/component';
+import { EventsFormComponent } from './administration/events/form/component';
 
 export let APP_ROUTES: Routes = [
   {
@@ -100,6 +101,18 @@ export let APP_ROUTES: Routes = [
           {
             path: 'list',
             component: EventsListComponent
+          },
+          {
+            path: 'add',
+            component: EventsFormComponent
+          },
+          {
+            path: 'edit/:id',
+            component: EventsFormComponent
+          },
+          {
+            path: 'detail/:id',
+            component: EventsFormComponent
           },
         ]
       },

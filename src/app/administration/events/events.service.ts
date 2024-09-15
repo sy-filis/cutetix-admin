@@ -64,34 +64,34 @@ export class EventService {
     )
   }
 
-  // public create(event: Event): Observable<Event> {
-  //   return this.httpClient.post(
-  //     `${environment.backend.api}/${this.API_PATH}`,
-  //     event
-  //   ).pipe(
-  //     map(
-  //       (res: any) => {
-  //         return <Event>res;
-  //       }
-  //     )
-  //   )
-  // }
+  public create(event: Event): Observable<Event> {
+    return this.httpClient.post(
+      `${environment.backend.api}/${this.API_PATH}`,
+      event
+    ).pipe(
+      map(
+        (res: any) => {
+          return <Event>res;
+        }
+      )
+    )
+  }
 
-  // public update(
-  //   id: string,
-  //   body: Event
-  // ): Observable<Event> {
-  //   return this.httpClient.patch(
-  //     `${environment.backend.api}/${this.API_PATH}/${id}`,
-  //     body
-  //   ).pipe(
-  //     map(
-  //       (res: any) => {
-  //         return <Event>res;
-  //       }
-  //     )
-  //   )
-  // }
+  public update(
+    id: string,
+    body: Event
+  ): Observable<Event> {
+    return this.httpClient.patch(
+      `${environment.backend.api}/${this.API_PATH}/${id}`,
+      body
+    ).pipe(
+      map(
+        (res: any) => {
+          return <Event>res;
+        }
+      )
+    )
+  }
 
   // public delete(id: string): Observable<Event> {
   //   return this.httpClient.delete(`${environment.backend.api}/${this.API_PATH}/${id}`).pipe(

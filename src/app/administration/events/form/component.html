@@ -1,0 +1,17 @@
+<form [formGroup]="form" (submit)="formMethod()">
+    <h1>{{ title }}</h1>
+
+    <label for="name">Name</label>
+    <input type="text" name="name" formControlName="name" required>
+
+    <label for="ticketsSalesStart">Ticket sales start</label>
+    <input type="datetime-local" name="ticketsSalesStart" formControlName="ticketsSalesStart">
+
+    <label for="ticketsSalesEnd">Ticket sales end</label>
+    <input type="datetime-local" name="ticketsSalesEnd" formControlName="ticketsSalesEnd">
+
+
+    <button class="alt" *ngIf="editButtonEnabled">
+        {{ editButtonText }}
+    </button>
+</form>

@@ -19,6 +19,7 @@ import { TicketGroupsNewComponent } from './ticket_groups/new/component';
 import { EventsListComponent } from './events/list/component';
 import { TicketsListComponent } from './tickets/list/component';
 import { TicketsNewComponent } from './tickets/new/component';
+import { EventsFormComponent } from './events/form/component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { TicketsNewComponent } from './tickets/new/component';
         TicketGroupsEditComponent,
         TicketGroupsNewComponent,
         EventsListComponent,
+        EventsFormComponent,
         TicketsListComponent,
         TicketsNewComponent,
     ],
