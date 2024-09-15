@@ -132,7 +132,7 @@ export class EventsFormComponent {
             progressBar: true
           }
         );
-        this.router.navigate(['/events/list']);
+        this.router.navigate(['/events/detail/' + event.id]);
       },
       error: (err) => {
         this.toastr.error(
