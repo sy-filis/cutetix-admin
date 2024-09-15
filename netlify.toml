@@ -1,5 +1,5 @@
 [build]
-publish = "dist/cutetix-admin/"
+publish = "dist/cutetix-admin/browser/"
 command = "npm run build"
 
 [[redirects]]
