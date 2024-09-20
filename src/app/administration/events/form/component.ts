@@ -15,6 +15,9 @@ export class EventsFormComponent {
     name: new FormControl('', Validators.required),
     ticketsSalesStart: new FormControl(new Date().toISOString().substring(0, 16), Validators.required),
     ticketsSalesEnd: new FormControl(new Date(new Date().getDate() + 14).toISOString().substring(0, 16), Validators.required),
+    smtpMailFrom: new FormControl(''),
+    mailTextNewTicket: new FormControl('New ticket has been created.', Validators.required),
+    mailHtmlNewTicket: new FormControl('<p>New ticket has been created.</p>', Validators.required),
   });
   public title: string = 'New event';
   public editButtonEnabled: boolean = true;
@@ -37,6 +40,9 @@ export class EventsFormComponent {
       this.form.get('name')?.disable();
       this.form.get('ticketsSalesStart')?.disable();
       this.form.get('ticketsSalesEnd')?.disable();
+      this.form.get('smtpMailFrom')?.disable();
+      this.form.get('mailTextNewTicket')?.disable();
+      this.form.get('mailHtmlNewTicket')?.disable();
     }
 
     // Get ID from query
@@ -63,6 +69,9 @@ export class EventsFormComponent {
             name: event.name,
             ticketsSalesStart: event.tickets_sales_start,
             ticketsSalesEnd: event.tickets_sales_end,
+            smtpMailFrom: event.smtp_mail_from,
+            mailTextNewTicket: event.mail_text_new_ticket,
+            mailHtmlNewTicket: event.mail_html_new_ticket,
           });
         },
         // Error
@@ -91,6 +100,9 @@ export class EventsFormComponent {
         name: this.form.value.name || '',
         tickets_sales_start: this.form.value.ticketsSalesStart || new Date().toISOString().substring(0, 16),
         tickets_sales_end: this.form.value.ticketsSalesEnd || new Date(new Date().getDate() + 14).toISOString().substring(0, 16),
+        smtp_mail_from: this.form.value.smtpMailFrom || '',
+        mail_text_new_ticket: this.form.value.mailTextNewTicket || '',
+        mail_html_new_ticket: this.form.value.mailHtmlNewTicket || '',
       }
     ).subscribe({
       next: (event) => {
@@ -122,6 +134,9 @@ export class EventsFormComponent {
         name: this.form.value.name || '',
         tickets_sales_start: this.form.value.ticketsSalesStart || new Date().toISOString().substring(0, 16),
         tickets_sales_end: this.form.value.ticketsSalesEnd || new Date(new Date().getDate() + 14).toISOString().substring(0, 16),
+        smtp_mail_from: this.form.value.smtpMailFrom || '',
+        mail_text_new_ticket: this.form.value.mailTextNewTicket || '',
+        mail_html_new_ticket: this.form.value.mailHtmlNewTicket || '',
       }
     ).subscribe({
       next: (event) => {

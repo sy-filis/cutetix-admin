@@ -10,6 +10,14 @@
     <label for="ticketsSalesEnd">Ticket sales end</label>
     <input type="datetime-local" name="ticketsSalesEnd" formControlName="ticketsSalesEnd">
 
+    <label for="smtpMailFrom">SMTP MAIL FROM</label>
+    <input type="text" name="smtpMailFrom" formControlName="smtpMailFrom">
+
+    <label for="mailTextNewTicket">Text for new ticket</label>
+    <textarea name="mailTextNewTicket" formControlName="mailTextNewTicket" rows="5" cols="10"></textarea>
+
+    <label for="mailHtmlNewTicket">HTML for new ticket</label>
+    <textarea name="mailHtmlNewTicket" formControlName="mailHtmlNewTicket" rows="2" cols="2"></textarea>
 
     <button class="alt" *ngIf="editButtonEnabled">
         {{ editButtonText }}
