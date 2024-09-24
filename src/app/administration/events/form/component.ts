@@ -18,6 +18,8 @@ export class EventsFormComponent {
     smtpMailFrom: new FormControl(''),
     mailTextNewTicket: new FormControl('New ticket has been created.', Validators.required),
     mailHtmlNewTicket: new FormControl('<p>New ticket has been created.</p>', Validators.required),
+    mailTextCancelledTicket: new FormControl('Your ticket has been cancelled.', Validators.required),
+    mailHtmlCancelledTicket: new FormControl('<p>Your ticket has been cancelled.</p>', Validators.required),
   });
   public title: string = 'New event';
   public editButtonEnabled: boolean = true;
@@ -43,6 +45,8 @@ export class EventsFormComponent {
       this.form.get('smtpMailFrom')?.disable();
       this.form.get('mailTextNewTicket')?.disable();
       this.form.get('mailHtmlNewTicket')?.disable();
+      this.form.get('mailTextCancelledTicket')?.disable();
+      this.form.get('mailHtmlCancelledTicket')?.disable();
     }
 
     // Get ID from query
@@ -72,6 +76,8 @@ export class EventsFormComponent {
             smtpMailFrom: event.smtp_mail_from,
             mailTextNewTicket: event.mail_text_new_ticket,
             mailHtmlNewTicket: event.mail_html_new_ticket,
+            mailTextCancelledTicket: event.mail_text_cancelled_ticket,
+            mailHtmlCancelledTicket: event.mail_html_cancelled_ticket,
           });
         },
         // Error
@@ -103,6 +109,8 @@ export class EventsFormComponent {
         smtp_mail_from: this.form.value.smtpMailFrom || '',
         mail_text_new_ticket: this.form.value.mailTextNewTicket || '',
         mail_html_new_ticket: this.form.value.mailHtmlNewTicket || '',
+        mail_text_cancelled_ticket: this.form.value.mailTextCancelledTicket || '',
+        mail_html_cancelled_ticket: this.form.value.mailHtmlCancelledTicket || '',
       }
     ).subscribe({
       next: (event) => {
@@ -137,6 +145,8 @@ export class EventsFormComponent {
         smtp_mail_from: this.form.value.smtpMailFrom || '',
         mail_text_new_ticket: this.form.value.mailTextNewTicket || '',
         mail_html_new_ticket: this.form.value.mailHtmlNewTicket || '',
+        mail_text_cancelled_ticket: this.form.value.mailTextCancelledTicket || '',
+        mail_html_cancelled_ticket: this.form.value.mailHtmlCancelledTicket || '',
       }
     ).subscribe({
       next: (event) => {
