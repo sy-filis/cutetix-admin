@@ -32,6 +32,7 @@ export class TicketsListComponent implements OnInit, OnDestroy {
   dtOptions: DataTables.Settings = {
     pagingType: 'full_numbers',
     pageLength: 25,
+    responsive: true,
   };
 
   constructor(
