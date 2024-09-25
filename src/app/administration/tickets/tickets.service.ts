@@ -93,15 +93,15 @@ export class TicketService {
   //   )
   // }
 
-  // public delete(id: string): Observable<Ticket> {
-  //   return this.httpClient.delete(`${environment.backend.api}/${this.API_PATH}/${id}`).pipe(
-  //     map(
-  //       (res: any) => {
-  //         return <Ticket>res;
-  //       }
-  //     )
-  //   )
-  // }
+  public delete(id: string): Observable<Ticket> {
+    return this.httpClient.delete(`${environment.backend.api}/${this.API_PATH}/${id}`).pipe(
+      map(
+        (res: any) => {
+          return <Ticket>res;
+        }
+      )
+    )
+  }
 
   public cancel(ticket: Ticket): Observable<Ticket> {
     return this.httpClient.post(

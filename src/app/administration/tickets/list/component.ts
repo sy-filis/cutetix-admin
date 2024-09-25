@@ -129,11 +129,22 @@ export class TicketsListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/tickets/edit/' + ticket.id])
   }
 
+  private notDeletedTicketToastr(ticket: Ticket) {
+    this.toastr.error(
+      `${ticket.firstname} ${ticket.lastname}`,
+      'Ticket DIDN\'T deleted!',
+      {
+        enableHtml: true,
+        progressBar: true,
+      }
+    );
+  }
+
   public delete(ticket: Ticket) {
     if (!ticket.id) {
       this.toastr.error(
-        `<div><b>Ticket DIDN'T deleted!</b><br/>Can't delete! Didn't receive ticket id.</div>`,
-        '',
+        'Can\'t delete! Didn\'t receive ticket id.',
+        'Ticket DIDN\'T deleted!',
         {
           enableHtml: true,
           progressBar: true,
@@ -141,29 +152,28 @@ export class TicketsListComponent implements OnInit, OnDestroy {
       );
       return;
     }
-    // this.ticketsService.delete(ticket.id).subscribe(
-    //   (ticket) => {
-    //     if (!ticket) {
-    //       this.toastr.error(
-    //         `<div><b>Ticket DIDN'T deleted!</b></div>`,
-    //         '',
-    //         {
-    //           enableHtml: true,
-    //           progressBar: true,
-    //         }
-    //       );
-    //       return
-    //     }
-    //     this.tickets.splice(this.tickets.indexOf(ticket), 1);
-    //     this.toastr.info(
-    //       `<b>Ticket "${ticket.name}" deleted</b>`,
-    //       '',
-    //       {
-    //         enableHtml: true,
-    //         progressBar: true
-    //       }
-    //     );
-    //   }
-    // )
+    if (!confirm(
+      `Are you sure to delete ticket for "${ticket.firstname} ${ticket.lastname}"?`
+    )) {
+      this.notDeletedTicketToastr(ticket);
+      return;
+    }
+    this.ticketsService.delete(ticket.id).subscribe(
+      (t) => {
+        if (!t) {
+          this.notDeletedTicketToastr(ticket);
+          return
+        }
+        this.updateTickets();
+        this.toastr.info(
+          `${t.firstname} ${t.lastname}`,
+          'Ticket deleted',
+          {
+            enableHtml: true,
+            progressBar: true
+          }
+        );
+      }
+    )
   }
 }
