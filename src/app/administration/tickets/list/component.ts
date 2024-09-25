@@ -88,12 +88,11 @@ export class TicketsListComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
-  private notCancelledTicketToastr() {
+  private notCancelledTicketToastr(ticket: Ticket) {
     this.toastr.error(
-      `<div><b>Ticket DIDN'T cancelled!</b></div>`,
-      '',
+      `${ticket.firstname} ${ticket.lastname}`,
+      'Ticket DIDN\'T cancelled!',
       {
-        enableHtml: true,
         progressBar: true,
       }
     );
@@ -101,23 +100,22 @@ export class TicketsListComponent implements OnInit, OnDestroy {
 
   public cancel(ticket: Ticket) {
     if (!confirm(
-      "Are you sure to cancel?"
+      `Are you sure to cancel ticket for "${ticket.firstname} ${ticket.lastname}"?`
     )) {
-      this.notCancelledTicketToastr()
+      this.notCancelledTicketToastr(ticket)
       return
     }
     this.ticketsService.cancel(ticket).subscribe(
       (ticket) => {
         if (!ticket) {
-          this.notCancelledTicketToastr()
+          this.notCancelledTicketToastr(ticket)
           return
         }
         this.updateTickets();
         this.toastr.info(
-          `<b>Ticket "${ticket.firstname} ${ticket.lastname}" cancelled</b>`,
-          '',
+          `${ticket.firstname} ${ticket.lastname}`,
+          'Ticket cancelled',
           {
-            enableHtml: true,
             progressBar: true
           }
         );
@@ -134,7 +132,6 @@ export class TicketsListComponent implements OnInit, OnDestroy {
       `${ticket.firstname} ${ticket.lastname}`,
       'Ticket DIDN\'T deleted!',
       {
-        enableHtml: true,
         progressBar: true,
       }
     );
@@ -146,7 +143,6 @@ export class TicketsListComponent implements OnInit, OnDestroy {
         'Can\'t delete! Didn\'t receive ticket id.',
         'Ticket DIDN\'T deleted!',
         {
-          enableHtml: true,
           progressBar: true,
         }
       );
@@ -169,7 +165,6 @@ export class TicketsListComponent implements OnInit, OnDestroy {
           `${t.firstname} ${t.lastname}`,
           'Ticket deleted',
           {
-            enableHtml: true,
             progressBar: true
           }
         );
