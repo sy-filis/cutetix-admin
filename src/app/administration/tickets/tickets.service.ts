@@ -102,4 +102,20 @@ export class TicketService {
   //     )
   //   )
   // }
+
+  public cancel(ticket: Ticket): Observable<Ticket> {
+    return this.httpClient.post(
+      `${environment.backend.api}/${this.API_PATH}/cancel`,
+      {
+        id: ticket.id,
+        email: ticket.email,
+      }
+    ).pipe(
+      map(
+        (res: any) => {
+          return <Ticket>res;
+        }
+      )
+    )
+  }
 }

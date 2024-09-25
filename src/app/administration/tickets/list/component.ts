@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { TicketService } from '../tickets.service';
 import { Ticket } from '../tickets.types';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-tickets-list',
@@ -14,16 +15,24 @@ import { Router } from '@angular/router';
 export class TicketsListComponent implements OnInit, OnDestroy {
   public faPen = faPen;
   public faTrash = faTrash;
+  public cancelIcon = faBan;
   public tickets: Ticket[] = [];
   public loadingState = 1;
   public errorLoading = {
     enabled: false,
     text: '',
   };
-  dtOptions: DataTables.Settings = {};
+  private startup = true;
+
   // We use this trigger because fetching the list can be quite long,
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {
+    pagingType: 'full_numbers',
+    pageLength: 25,
+  };
 
   constructor(
     private readonly ticketsService: TicketService,
@@ -31,17 +40,27 @@ export class TicketsListComponent implements OnInit, OnDestroy {
     private readonly router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 25,
-    };
-
+  private updateTickets() {
+    this.loadingState = 1;
+    this.errorLoading = {
+      enabled: false,
+      text: '',
+    }
     this.ticketsService.get().subscribe({
       next: (tickets) => {
         this.tickets = tickets;
-        // Calling the DT trigger to manually render the table
-        this.dtTrigger.next(null);
+        if (this.startup) {
+          this.startup = false;
+          // Render it without destroy
+          this.dtTrigger.next(null);
+        } else {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destroy the table first
+            dtInstance.destroy();
+            // Call the dtTrigger to rerender again
+            this.dtTrigger.next(null);
+          });
+        }
         this.loadingState--;
       },
       error: (err) => {
@@ -52,6 +71,10 @@ export class TicketsListComponent implements OnInit, OnDestroy {
       },
       complete: () => console.info('complete')
     });
+  }
+
+  ngOnInit(): void {
+    this.updateTickets();
 
     this.ticketsService.deleteAsObservable().subscribe(
       (ticket) => {
@@ -61,8 +84,45 @@ export class TicketsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the ticket
+    // Do not forget to unsubscribe the table trigger
     this.dtTrigger.unsubscribe();
+  }
+
+  private notCancelledTicketToastr() {
+    this.toastr.error(
+      `<div><b>Ticket DIDN'T cancelled!</b></div>`,
+      '',
+      {
+        enableHtml: true,
+        progressBar: true,
+      }
+    );
+  }
+
+  public cancel(ticket: Ticket) {
+    if (!confirm(
+      "Are you sure to cancel?"
+    )) {
+      this.notCancelledTicketToastr()
+      return
+    }
+    this.ticketsService.cancel(ticket).subscribe(
+      (ticket) => {
+        if (!ticket) {
+          this.notCancelledTicketToastr()
+          return
+        }
+        this.updateTickets();
+        this.toastr.info(
+          `<b>Ticket "${ticket.firstname} ${ticket.lastname}" cancelled</b>`,
+          '',
+          {
+            enableHtml: true,
+            progressBar: true
+          }
+        );
+      }
+    )
   }
 
   public edit(ticket: Ticket) {
