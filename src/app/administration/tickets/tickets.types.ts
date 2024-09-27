@@ -3,8 +3,14 @@ export interface Ticket {
     firstname: string;
     lastname: string;
     email: string;
-    // TODO: Enum
-    status?: number;
+    status?: TicketStatusEnum;
     description?: string;
     group_id: number;
+}
+
+export enum TicketStatusEnum {
+    new = 0,
+    confirmed = 1,
+    paid = 2,
+    cancelled = 3,
 }

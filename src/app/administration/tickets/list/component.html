@@ -25,8 +25,14 @@
                 <!-- so hidden column with IDs is second -->
                 <td style="display: none;">{{ ticket.id }}</td>
                 <td>{{ ticket.email }}</td>
-                <!-- TODO: Enum -->
-                <td>{{ ticket.status }}</td>
+                <!-- <td *ngSwitch="ticket.status"> -->
+                <td>
+                    <!-- <span *ngSwitchCase="ticketStatusEnum.new"></span> -->
+                    <span *ngIf="ticket.status == 0" class="new">New</span>
+                    <span *ngIf="ticket.status == 1" class="confirmed">Confirmed</span>
+                    <span *ngIf="ticket.status == 2" class="paid">Paid</span>
+                    <span *ngIf="ticket.status == 3" class="cancelled">Cancelled</span>
+                </td>
                 <td>
                     <button class="destructive" (click)="cancel(ticket)">
                         <fa-icon [icon]="cancelIcon"></fa-icon>

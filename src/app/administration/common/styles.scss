@@ -26,6 +26,24 @@ td {
             background-color: #BF40BF;
         }
     }
+
+    span {
+        &.new {
+            color: green;
+        }
+
+        &.confirmed {
+            color: $foreColorMediumLight;
+        }
+
+        &.paid {
+            color: greenyellow;
+        }
+
+        &.cancelled {
+            color: red;
+        }
+    }
 }
 
 .error {
