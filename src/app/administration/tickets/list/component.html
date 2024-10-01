@@ -14,6 +14,7 @@
                 <th style="display: none;">ID</th>
                 <th>E-mail</th>
                 <th>Group</th>
+                <th>Event</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -36,6 +37,14 @@
                     </a>
                     <span *ngIf="ticket.group == null">
                         No group
+                    </span>
+                </td>
+                <td>
+                    <a *ngIf="ticket.group?.event != null" [routerLink]="'/events/detail/' + ticket.group?.event?.id">
+                        {{ ticket.group?.event?.name}}
+                    </a>
+                    <span *ngIf="ticket.group?.event == null">
+                        No event for group
                     </span>
                 </td>
 
