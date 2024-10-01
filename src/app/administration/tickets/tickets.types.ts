@@ -1,3 +1,5 @@
+import { TicketGroup } from "../ticket_groups/ticket_groups.types";
+
 export interface Ticket {
     id?: string;
     firstname: string;
@@ -6,6 +8,7 @@ export interface Ticket {
     status?: TicketStatusEnum;
     description?: string;
     group_id: number;
+    group?: TicketGroup;
 }
 
 export enum TicketStatusEnum {

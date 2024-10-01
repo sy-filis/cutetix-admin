@@ -2,7 +2,7 @@
 <div>
     <div *ngIf="this.errorLoading.enabled" class="error">
         <p>
-            There's problem loading table.<br/>
+            There's problem loading table.<br />
             {{ this.errorLoading.text }}
         </p>
     </div>
@@ -13,6 +13,7 @@
                 <th>First Name</th>
                 <th style="display: none;">ID</th>
                 <th>E-mail</th>
+                <th>Group</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -22,9 +23,22 @@
                 <!-- Datatables should sort by first column -->
                 <td>{{ ticket.lastname }}</td>
                 <td>{{ ticket.firstname }}</td>
-                <!-- so hidden column with IDs is second -->
+                <!-- so hidden column with IDs is third -->
                 <td style="display: none;">{{ ticket.id }}</td>
-                <td>{{ ticket.email }}</td>
+                <td>
+                    <a href="mailto:{{ ticket.email }}">
+                        {{ ticket.email }}
+                    </a>
+                </td>
+                <td>
+                    <a *ngIf="ticket.group != null" [routerLink]="'/ticket_groups/detail/' + ticket.group.id">
+                        {{ ticket.group.name}}
+                    </a>
+                    <span *ngIf="ticket.group == null">
+                        No group
+                    </span>
+                </td>
+
                 <!-- <td *ngSwitch="ticket.status"> -->
                 <td>
                     <!-- <span *ngSwitchCase="ticketStatusEnum.new"></span> -->
