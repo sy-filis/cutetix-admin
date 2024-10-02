@@ -10,10 +10,9 @@ export const environment = {
       // socketio: "https://api-dev.cutetix.rudickamladez.cz/ws"
     },
     keycloak: {
-      // TODO: Update realm
-      issuer: 'https://auth.lukasmatuska.cz/realms/pohles',
-      clientId: 'admin-v2',
-      clientSecret: 'poW7Tr4edeEKUXf8dGQjpTymye6L4rRW',
+      issuer: 'https://auth.lukasmatuska.cz/realms/cutetix',
+      clientId: 'frontend-admin-angular',
+      clientSecret: 'D1P30Il4TGwFLFJTwBhKaan1zANUVSCZ',
       responseType: 'code',
       scope: 'openid profile email',
       requireHttps: true,
