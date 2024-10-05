@@ -81,7 +81,7 @@ export class TicketGroupService {
     id: string,
     body: TicketGroupUpdate
   ): Observable<TicketGroup> {
-    return this.httpClient.patch(
+    return this.httpClient.put(
       `${environment.backend.api}/${this.API_PATH}/${id}`,
       body
     ).pipe(
