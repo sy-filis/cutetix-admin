@@ -99,7 +99,8 @@ export class TicketGroupsEditComponent {
       this.id || '',
       {
         name: this.form.value.name || '',
-        capacity: this.form.value.capacity || 0
+        capacity: this.form.value.capacity || 0,
+        event_id: this.form.value.eventId || 0
       }
     ).subscribe({
       next: (ticket_group) => {
