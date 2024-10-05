@@ -66,8 +66,7 @@ export class TicketGroupsEditComponent {
         this.form.setValue({
           name: ticket_group.name,
           capacity: ticket_group.capacity,
-          // TODO: Fix depends on backend response
-          eventId: 0 // ticket_group.event_id,
+          eventId: ticket_group.event_id,
         });
       },
       // Error
