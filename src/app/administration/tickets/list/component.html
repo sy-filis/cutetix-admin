@@ -11,7 +11,7 @@
             <tr>
                 <th>Last Name</th>
                 <th>First Name</th>
-                <th style="display: none;">ID</th>
+                <th>ID</th>
                 <th>E-mail</th>
                 <th>Group</th>
                 <th>Event</th>
@@ -24,8 +24,7 @@
                 <!-- Datatables should sort by first column -->
                 <td>{{ ticket.lastname }}</td>
                 <td>{{ ticket.firstname }}</td>
-                <!-- so hidden column with IDs is third -->
-                <td style="display: none;">{{ ticket.id }}</td>
+                <td>{{ ticket.id }}</td>
                 <td>
                     <a href="mailto:{{ ticket.email }}">
                         {{ ticket.email }}
