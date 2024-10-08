@@ -13,6 +13,7 @@
                 <th>First Name</th>
                 <th>ID</th>
                 <th>E-mail</th>
+                <th style="display: none;">Description</th>
                 <th>Group</th>
                 <th>Event</th>
                 <th>Status</th>
@@ -30,6 +31,7 @@
                         {{ ticket.email }}
                     </a>
                 </td>
+                <td style="display: none;">{{ ticket.description }}</td>
                 <td>
                     <a *ngIf="ticket.group != null" [routerLink]="'/ticket_groups/detail/' + ticket.group.id">
                         {{ ticket.group.name}}
