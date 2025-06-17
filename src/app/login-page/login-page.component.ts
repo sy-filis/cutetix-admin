@@ -5,8 +5,9 @@ import { authPasswordFlowConfig } from '../auth-password-flow.config';
 import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+    templateUrl: './login-page.component.html',
+    styleUrls: ['./login-page.component.scss'],
+    standalone: false
 })
 export class LoginPageComponent implements OnInit {
   public loggingIn: boolean = false;

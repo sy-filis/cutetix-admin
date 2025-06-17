@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
-  selector: 'app-logged-user',
-  templateUrl: './logged-user.component.html',
-  styleUrls: ['./logged-user.component.scss']
+    selector: 'app-logged-user',
+    templateUrl: './logged-user.component.html',
+    styleUrls: ['./logged-user.component.scss'],
+    standalone: false
 })
 export class LoggedUserComponent {
   formatedRoles = 'All';
